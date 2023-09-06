@@ -50,10 +50,9 @@ def if_k(testedSet, k):
 
 def Generalization_attr(tempDataSet, attr, vgh, h):
     for index,row in vgh.iterrows():
-        print(attr)
         if row.height==h:
             tempDataSet.replace({attr:row.value},vgh.loc[row.parent].value,inplace=True)
-            print('1',row.value,vgh.loc[row.parent].value)
+            #print('1',row.value,vgh.loc[row.parent].value)
 
 # 属性标签
 attributeLabels = ["age",  # 0年龄            int64
@@ -156,7 +155,7 @@ quasi_identifier_height_list.append(0)
 print(vgh_workclass)
 # 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-    data=pd.read_csv('data/precise/adult.data',header=None,sep=',',names=attributeLabels)
+    data=pd.read_csv('data/csv/adult.data',header=None,sep=',',names=attributeLabels)
     # 将缺失值部分的“ ？” 置为空，即np.NaN，便于使用pandas来处理缺失值
     data_clean = data.replace(regex=[r'\?|\.|\$'], value=np.nan)
     data=data_clean.dropna(how='any')#将所有含有缺失值的行都去掉
@@ -175,7 +174,7 @@ if __name__ == '__main__':
     #data.reset_index(drop=True, inplace=True)#重置索引
     print(data[:15])
     # k值定义
-    k_Anonymity = 188
+    k_Anonymity = 18
     #data['workclass'].replace('Self-emp-not-inc','Private-h1',inplace=True)
     # 泛化次数计数，初始化为所有准标识符泛化次数之和
     gen_count = 0
@@ -214,13 +213,7 @@ if __name__ == '__main__':
 
     print('当前k值为：')
     print(k_Anonymity)
-    print('精确度为：')
-    prec = 0
-    for index in range(len(quasi_identifier_list)):
-        prec += (quasi_identifier_height_list[index]) / (quasi_identifier_DGH_list[index])
-    prec = 1 - (prec / len(quasi_identifier_list))
 
-    print(prec)
     if_k(data,k_Anonymity)
     data.to_csv("data/output/K_15.csv")
     # data.insert(0,'name',None)
@@ -236,3 +229,10 @@ if __name__ == '__main__':
     # cur=connection.cursor()
     # print(cur.fetchall())#数据库部分
     print('end')
+    # print('精确度为：')
+    # prec = 0
+    # for index in range(len(quasi_identifier_list)):
+    #     prec += (quasi_identifier_height_list[index]) / (quasi_identifier_DGH_list[index])
+    # prec = 1 - (prec / len(quasi_identifier_list))
+    #
+    # print(prec)
