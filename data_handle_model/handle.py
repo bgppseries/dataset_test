@@ -13,17 +13,28 @@ def read_csv(path,out):
     # for index,row in date.iterrows():
     #     for i in date.
     df = pd.read_csv(path)
-    first_column = df.columns[0]
-    other_columns = df.columns[1:]
-    tuples = []
-    for _, row in df.iterrows():
-        first_value = row[first_column]
+    other_columns = df.columns[0:]
+    u_node = []
+    A_node=[]
+    A_U_link=[]
+    uuid_column = [str(uuid.uuid4()) for _ in range(df.shape[0])]
+    node_id=0
+    for l, row in df.iterrows():
+        u_node.append((uuid_column[l], "user"))
         for column in other_columns:
             other_value = row[column]
-            tuples.append((first_value,f"{column}", other_value))
-    result_df = pd.DataFrame(tuples, columns=['uuid', 'link','value'])
-    result_df.to_csv(out, index=False,encoding='UTF-8')
-
+            A_node.append((node_id,other_value,f"{column}"))
+            A_U_link.append((uuid_column[l],node_id,f"{column}"))
+            node_id=node_id+1
+    unode=pd.DataFrame(u_node,columns=['uuid:ID',':LABEL'])
+    anode=pd.DataFrame(A_node,columns=['node_id:ID','value',':LABEL'])
+    A_U=pd.DataFrame(A_U_link,columns=[':START_ID',':END_ID',':TYPE'])
+    out1=out+"u_nodes.csv"
+    out2=out+"a_nodes.csv"
+    out3=out+"au_relationship.csv"
+    unode.to_csv(out1, index=False,encoding='UTF-8')
+    anode.to_csv(out2, index=False,encoding='UTF-8')
+    A_U.to_csv(out3, index=False,encoding='UTF-8')
     # with open(path,"r") as file:
     #     l=readline_count(file)
     #     reader=csv.reader(file)
@@ -46,7 +57,7 @@ def readline_count(file_name):
 
 if __name__=='__main__':
     path='../data/csv/adult_with_pii.csv'
-    out='../data/output/csv_out.csv'
+    out='../data/output/'
     read_csv(path,out)
     print("hello world")
     # with open("datebase.yaml","r") as file:
