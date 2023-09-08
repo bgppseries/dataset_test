@@ -1,6 +1,12 @@
 from py2neo import Graph, Node, Relationship
 from py2neo import NodeMatcher, RelationshipMatcher, NodeMatch
 
+def delet_database():
+    """
+    本函数直接删库跑路喽
+    todo 文件目录目前写死
+    :return:
+    """
 
 class connect2neo4j():
     def __init__(self):
