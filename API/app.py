@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 import os.path
 import zipfile
+from datetime import datetime
+from time import time
 
-# import control.event_manger
-from flask import Flask, request, url_for, send_from_directory, render_template
-from flask_restful import Api, Resource
+from flask import request, render_template
 from flask_uploads import UploadSet, ALL, configure_uploads, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from werkzeug.utils import secure_filename
 from wtforms import SubmitField
-
-import data_handle_model.handle
+from configparser import ConfigParser
+import data_handle_model.csv_handle
 from control.event_manger import *
+##app = create_flask_app()
 
-app = Flask(__name__)
-# api = Api(app)
+from make_celery import app
 basedir = data_handle_model.handle.get_current_parentpath()
 app.config['SECRET_KEY'] = 'I have a dream'
 app.config['UPLOADED_PRIVATE_DEST'] = basedir + '/data/test/tmp'
@@ -25,6 +24,7 @@ private=UploadSet('private',ALL)
 configure_uploads(app,private)
 patch_request_class(app)
 
+print(app.template_folder)
 class UploadForm(FlaskForm):
     file = FileField(validators=[FileAllowed(private, 'Plaease input IMAGE or DOCUMENT or TEXT!'), FileRequired('File was empty!')])
     submit = SubmitField('Upload')
@@ -53,6 +53,7 @@ def upload_file():
         return render_template('file.html',form=form,file_url=file_url,type_check=type_check)
     if request.method =='GET':
         return render_template('file.html',form=form,file_url=None,type_check=False)
+
 
 def allowed_file(filename):
     """
@@ -84,27 +85,30 @@ def start_handle(path):
     eventloop.Start()
     s=sigmoid(eventloop)
     s.send_signal(path,str(uuid4()))
-# class file_load(Resource):
-#     """
-#     继承Resource类
-#     重写get、post动作
-#     """
-#
-#     def get(self):
-#         """
-#         todo
-#         :return:
-#         """
-#
-#     def post(self):
-#         json_data = request.get_json()
 
+def start():
+    config = ConfigParser()
+    config.read('../setting/set.config', encoding='UTF-8')
+    info=config['flask']
+    addr=info['run_ipaddr']
+    port=info['run_port']
+    app.run(debug=True,host=addr,port=int(port))
 
 @app.route('/hello')
 def hello():
     return 'hello world!'
 
+@app.route('/time',methods=["GET","POST"])
+def get_time():
+    return datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
+
+from control.task import test
+@app.route('/async_test',methods=["GET","POST"])
+def submit():
+    start_time=time()
+    test.delay()
+    cost=time()-start_time
+    return cost
 
 if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port=8080)
-    # todo read config
+    start()

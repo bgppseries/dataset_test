@@ -8,7 +8,7 @@ from queue import Queue, Empty
 from threading import *
 from uuid import uuid3, uuid4
 
-from data_handle_model.handle import importer
+from data_handle_model.csv_handle import importer
 
 #预定义事件类型
 

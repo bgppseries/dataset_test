@@ -1,0 +1,12 @@
+2023-09-28 10:43:19,689 - 30708-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:40] - INFO: [info] it is the first step
+2023-09-28 10:44:44,739 - 15492-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:40] - INFO: [info] it is the first step
+2023-09-28 10:45:42,070 - 3616-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:40] - INFO: [info] it is the first step
+2023-09-28 10:47:02,806 - 21536-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:40] - INFO: [info] it is the first step
+2023-09-28 11:35:01,326 - 27808-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:38] - INFO: [info] it is the first step
+2023-10-07 10:54:25,452 - 3208-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:39] - INFO: [info] it is the first step
+2023-10-07 10:55:14,077 - 12744-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:39] - INFO: [info] it is the first step
+2023-10-07 11:33:00,722 - 24244-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:39] - INFO: [info] it is the first step
+2023-10-07 11:37:09,720 - 3292-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\mq.py[line:39] - INFO: [info] it is the first step
+2023-10-07 15:55:33,842 - 20500-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\test.py[line:42] - INFO: [info] it is the first step
+2023-10-07 16:03:12,085 - 9188-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\test.py[line:42] - INFO: [info] it is the first step
+2023-10-08 14:49:31,552 - 20232-MainThread - C:\Users\13374\PycharmProjects\pythonProject\control\test.py[line:44] - INFO: [info] it is the producer send a msg
