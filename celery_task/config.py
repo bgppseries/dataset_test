@@ -1,9 +1,9 @@
 #coding:utf-8
 # 消息代理使用rabbitmq。与celery实例化时broker参数意义相同
-broker_url = "amqp://qwb:784512@192.168.1.121:5672/test"
+broker_url = "amqp://qwb:784512@192.168.1.111:5672/test"
 
 # 结果存储使用redis(默认数据库-零)。与celery实例化时backend参数意义相同
-result_backend = 'redis://:ningzaichun@192.168.1.121:6379/1'
+result_backend = 'redis://:ningzaichun@192.168.1.111:6379/1'
 
 # LOG配置
 worker_log_format = "[%(asctime)s] [%(levelname)s] %(message)s"

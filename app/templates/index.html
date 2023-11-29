@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>隐私保护效果评估系统</title>
-    <script type="text/javascript" src="../static/js/jquery.js"></script>
+<!--    <script type="text/javascript" src="../static/js/jquery.js"></script>-->
+    <!-- 引入jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 引入jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+
+    <script type="text/javascript" src="../static/js/echart.js"></script>
+    <script type="text/javascript" src="../static/js/file.js"></script>
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/blueprint.css') }}">-->
     <link rel="stylesheet" href="../static/css/blueprint.css">
 </head>
 
@@ -15,7 +27,7 @@
 <body>
 
 <!--这是一个动态的粒子效果图，设置了透明度为0.2-->
-<div class="canvas" style="opacity: 0.9">
+<div class="canva" style="opacity: 0.9">
     <iframe frameborder="0" src="../static/js/index.html" style="width: 100%; height: 100%"></iframe>
 </div>
 
@@ -29,7 +41,7 @@
 <div class="navigation">
     <ul>
           <li class="current"><a href="index.html">首页</a></li>
-          <li><a href="tmp.html">产品介绍</a></li>
+          <li><a href="tmp.html">知识图谱</a></li>
           <li><a href="#">服务介绍</a></li>
           <li><a href="#">关于我们</a></li>
           <li><a href="#">联系我们</a></li>
@@ -81,6 +93,12 @@
 <!--</div>-->
 <div class="header">
         隐私保护效果评估系统
+        <div class="weather">
+        <img src="../static/picture/weather.png"><span></span>
+        <span id="showTime"></span>
+    </div>
+
+    <script type="text/javascript" src="../static/js/showtime.js"></script>
 </div>
 <!--主体布局-->
 <div class="mainbox">
@@ -90,7 +108,10 @@
         <div class="panel">
 <!--        左侧栏第一个区块：包含标题、图表、底部修饰三个区块-->
             <div class="h">图表标题</div>
-            图表
+            <div class="chart" id="first"></div>
+            <script type="text/javascript">
+                setTimeout(showl1,50);
+            </script>
             <div class="panel-footer"></div>
         </div>
         <div class="panel">
@@ -109,37 +130,78 @@
             </div>
             <div class="tch">
                 <lit>
-                    <hh>平均评估时间</hh>
-                    <ll1>
-                        
-                    </ll1>
-                    <hh>评估场景覆盖</hh>
-                    <ll1>
-                        37
-                    </ll1>
+                    <ul style="list-style: none;">
+                        <div class="up">
+                            <div class="ll1">5min</div>
+                            <div class="hh">平均评估时间</div>
+                        </div>
+                        <div class="up">
+                            <li class="ll1">39</li>
+                            <li class="hh">评估场景覆盖</li>
+                        </div>
+                    </ul>
                 </lit>
-                <lit>评估数据种类扇形图</lit>
+
                 <lit>
-                    3
+                <div class="pannel">
+                    <div class="h">隐私评估场景</div>
+                    <div class="chart" id="range"></div>
+                    <script type="text/javascript">
+                        setTimeout(show,50);
+                    </script>
+                    <div class="pannel-footer"></div>
+                </div>
                 </lit>
+<lit>
+    <ul style="list-style: none;">
+        <div class="up">
+            <div class="ll1">015</div>
+            <div class="hh">评估指标总数</div>
+        </div>
+        <div class="up">
+            <li class="ll1">39K</li>
+            <li class="hh">评估个人信息总数</li>
+        </div>
+    </ul>
+</lit>
+
+            </div>
+        </div>
+        <div class="md">
+            <!--中间往下的部分-->
+            <div class="mdp">
+                <!--展示模块-->
+                系统运行情况滚动展示模块
+            </div>
+
+            <div class="file">
+                <!--文件上传-->
+                <form id="upload" enctype="multipart/form-data" method="post" onsubmit="return submitForm();">
+                    <input type="file" name="file" value="隐私数据上传" class="input"/>
+                    <input type="submit" value="提交" class="submit"/>
+                </form>
+
             </div>
         </div>
     </div>
-    <div class="column">3</div>
+    <div class="column">
+        <!--右侧栏-->
+        <div class="panel">
+<!--        右侧栏第一个区块：包含标题、图表、底部修饰三个区块-->
+            <div class="h">图表标题</div>
+            图表
+            <div class="panel-footer"></div>
+        </div>
+        <div class="panel">
+            <div class="h">echart title</div>
+            todo
+            <div class="panel-footer"></div>
+        </div>
+    </div>
 
 </div>
 
 
-<!--&lt;!&ndash;一个Ajax样例&ndash;&gt;-->
-<!--<div class="">-->
-
-
-
-<!--</div>-->
-
-<!--&lt;!&ndash;一个echart样例&ndash;&gt;-->
-
-<!--&lt;!&ndash;file up&ndash;&gt;-->
 
 </body>
 </html>

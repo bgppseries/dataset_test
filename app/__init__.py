@@ -3,6 +3,9 @@ import click
 from flask import Flask,jsonify
 from celery import Celery
 
+
+from app.api.file import api_file
+from app.api.show import api_show
 from app.config.flask_config import config
 from app.config import celery_config
 
@@ -49,6 +52,8 @@ def register_blueprints(app):
     with app.app_context():
 
         app.register_blueprint(api_test, url_prefix='/api/test')
+        app.register_blueprint(api_file,url_prefix='/api/file')
+        app.register_blueprint(api_show,url_prefix='/api/show')
 
 
 def register_errors(app):

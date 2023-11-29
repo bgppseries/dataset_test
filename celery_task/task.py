@@ -26,9 +26,10 @@ class MyTask(Task): # celery 基类
 
 @celery.task(bind=True, base=MyTask)
 def apptask(self):
-    print(current_app.config)
-    print("==============%s " % current_app.config["SQLALCHEMY_DATABASE_URI"])
-    print("++++++++++++++%s " % os.getenv("DATABASE_URL"))
+    #print(current_app.config)
+    #print("==============%s " % current_app.config["SQLALCHEMY_DATABASE_URI"])
+    #print("++++++++++++++%s " % os.getenv("DATABASE_URL"))
+    print('it is the first step')
     time.sleep(5)
     return 'success'
 
@@ -37,3 +38,20 @@ def get_time(self):
     print(time.time())
     time.sleep(5)
     return 'it is a great step'
+
+
+@celery.task(bind=True,base=MyTask)
+def utli(self):
+    print(time.time())
+    time.sleep(5)
+    get_time.delay()
+    apptask.delay()
+    return 'it is the final step'
+@celery.task(bind=True,base=MyTask)
+def start(self,url):
+    strat_evaluate(url)
+    return '任务已提交，正在执行中...'
+
+def start_evaluate(url):
+    metric_complute_func.delay()
+    ...
