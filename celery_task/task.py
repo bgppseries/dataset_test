@@ -8,7 +8,6 @@ celery=Celery()
 celery.config_from_object(config)
 
 class MyTask(Task): # celery 基类
-
     def on_success(self, retval, task_id, args, kwargs):
         # 执行成功的操作
         #todo logger
@@ -27,8 +26,8 @@ class MyTask(Task): # celery 基类
 @celery.task(bind=True, base=MyTask)
 def apptask(self):
     #print(current_app.config)
-    #print("==============%s " % current_app.config["SQLALCHEMY_DATABASE_URI"])
-    #print("++++++++++++++%s " % os.getenv("DATABASE_URL"))
+    print("==============%s " % current_app.config["SQLALCHEMY_DATABASE_URI"])
+    print("++++++++++++++%s " % os.getenv("DATABASE_URL"))
     print('it is the first step')
     time.sleep(5)
     return 'success'

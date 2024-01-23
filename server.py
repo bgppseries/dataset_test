@@ -10,7 +10,6 @@ from celery_task.task import apptask, get_time, utli
 from data_handle_model.csv_handle import get_current_parentpath
 app=make_app()
 # cel=make_celery(app)
-from API.test import demo_task
 basedir = get_current_parentpath()
 #app.config['SECRET_KEY'] = 'I have a dream'
 #app.config['UPLOADED_PRIVATE_DEST'] = basedir + '/data/test/tmp'
